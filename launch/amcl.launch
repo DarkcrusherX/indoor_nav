@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="rplidar_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 base_link rplidar_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="odom_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 odom base_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="map_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 map odom 100"/>
+  <node pkg="amcl" type="amcl" name="amcl">
+    <remap from="/scan" to="laser/scan"/>  
+    <!-- Publish scans from best pose at a max of 10 Hz -->
+    <param name="odom_model_type" value="omni"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_link" />
+    <param name="global_frame_id" value="map" />
+  </node>
+</launch>

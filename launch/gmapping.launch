@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="rplidar_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 rplidar_link base_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="odom_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 odom rplidar_link 100"/>
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+    <remap from="scan" to="/laser/scan"/>
+    <param name="odom_frame" value="odom"/>
+    <param name = "temporalUpdate" value = "0.1"/>
+    <param name = "linearUpdate" value = "0.1"/>
+    <param name = "angularUpdate" value = "0.3"/>
+  </node>
+</launch>
