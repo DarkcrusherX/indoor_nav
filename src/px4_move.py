@@ -74,7 +74,7 @@ def main(i):
     print(msg.poses[i])
     #print(dist)
     rate = rospy.Rate(10)
-    while dist > 0.1:
+    while dist > 0.01:
 
         rate.sleep()
         rospy.Subscriber('/mavros/local_position/pose',PoseStamped,callback_pos)
@@ -89,7 +89,7 @@ def main(i):
 
 
 
-    if dist <0.1 :
+    if dist <0.01 :
         i = i+1
         main(i)
 
